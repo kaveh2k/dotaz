@@ -1,15 +1,6 @@
 "use client";
-import { ApolloClient, InMemoryCache, ApolloProvider } from "@apollo/client";
-import getToken from "@/func/getToken";
-
-const token = getToken();
-
-const client = new ApolloClient({
-  uri: "https://api.stratz.com/graphql",
-  cache: new InMemoryCache(),
-  connectToDevTools: true,
-  headers: { authorization: token ? `Bearer ${token}` : "" },
-});
+import { ApolloProvider } from "@apollo/client";
+import client from "./setClient";
 
 const URQL = ({ children }) => {
   return <ApolloProvider client={client}>{children}</ApolloProvider>;
