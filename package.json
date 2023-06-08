@@ -1,0 +1,33 @@
+{
+  "name": "my-app",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@apollo/client": "^3.7.15",
+    "@emotion/react": "^11.11.0",
+    "@emotion/styled": "^11.11.0",
+    "@headlessui/react": "^1.7.15",
+    "@mui/material": "^5.13.3",
+    "autoprefixer": "10.4.14",
+    "eslint": "8.41.0",
+    "eslint-config-next": "13.4.4",
+    "fuse.js": "^6.6.2",
+    "next": "13.4.4",
+    "postcss": "8.4.24",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "react-transition-group": "^4.4.5",
+    "tailwindcss": "3.3.2",
+    "zustand": "^4.3.8"
+  },
+  "devDependencies": {
+    "graphql": "^16.6.0",
+    "graphql-tag": "^2.12.6"
+  }
+}

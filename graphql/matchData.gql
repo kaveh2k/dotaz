@@ -1,0 +1,18 @@
+query MatchData($id: Long!) {
+  match(id: $id) {
+    id
+    didRadiantWin
+    durationSeconds
+    direKills
+    radiantKills
+    pickBans {
+      playerIndex
+      heroId
+      order
+      bannedHeroId
+      isRadiant
+      playerIndex
+      wasBannedSuccessfully
+    }
+  }
+}
