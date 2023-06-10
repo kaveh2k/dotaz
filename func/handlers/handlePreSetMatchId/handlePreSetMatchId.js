@@ -1,3 +1,5 @@
+import func from "@/func";
+
 const handlePreSetMatchId = (
   setShowError,
   setShowData,
@@ -9,19 +11,12 @@ const handlePreSetMatchId = (
   setShowErrorLocal(showError);
   setShowError(null);
   setShowData(false);
-  if (!isNaN(perSetMatchId)) {
-    if (Number(perSetMatchId) !== 0) {
-      getResult({ variables: { id: Number(perSetMatchId) } });
-    } else {
-      setShowErrorLocal("please enter your match ID");
-      setShowError("please enter your match ID");
-    }
-  } else {
-    setShowErrorLocal("please enter your match ID");
-    setShowError("please enter your match ID");
-  }
+  func.handler.handleFetchMatchId(
+    perSetMatchId,
+    getResult,
+    setShowErrorLocal,
+    setShowError
+  );
 };
 
 export default handlePreSetMatchId;
-
-// TODO: create seperate file for handle fetch matchid

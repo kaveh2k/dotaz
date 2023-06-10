@@ -4,6 +4,7 @@ import handlePick from "./handlePick/handlePick";
 import handleFindHeroPic from "./handleFindHeroPic/handleFindHeroPic";
 import handlePreSetMatchId from "./handlePreSetMatchId/handlePreSetMatchId";
 import handleFindHeroName from "./handleFindHeroName/handleFindHeroName";
+import handleFetchMatchId from "./handleFetchMatchId/handleFetchMatchId";
 
 const handler = {
   handleSetData,
@@ -12,6 +13,7 @@ const handler = {
   handleFindHeroPic,
   handlePreSetMatchId,
   handleFindHeroName,
+  handleFetchMatchId,
 };
 
 export default handler;
