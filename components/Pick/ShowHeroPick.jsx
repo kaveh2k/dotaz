@@ -1,6 +1,4 @@
-import { useLazyQuery } from "@apollo/client";
 import { useEffect, useState } from "react";
-import { heroData } from "@/graphql/heroData.gql";
 
 import fuse from "@/engine/searchPic.eangine";
 import Image from "next/image";
@@ -19,12 +17,11 @@ const ShowHeroPick = ({ children, cn }) => {
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState();
 
-  //const [getHero, { data, loading }] = useLazyQuery(heroData);
-
   // ********************************************************
+
   useEffect(() => {
     setLoading(true);
-    setData(handleFindHeroName(Number(children)));
+    setData(handleFindHeroName(Number(children[0])));
   }, []);
 
   useEffect(() => {
