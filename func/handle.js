@@ -1,4 +1,4 @@
-import { heroesName } from "@/model/heroesName&ID.model";
+import { heroesName } from "@/model/heroesNameAndID.model";
 
 const handleFindHeroPic = (f, q) => {
   const result = f.search(q);
