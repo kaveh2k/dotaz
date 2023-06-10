@@ -1,3 +1,5 @@
+import { heroesName } from "@/model/heroesName&ID.model";
+
 const handleFindHeroPic = (f, q) => {
   const result = f.search(q);
   return result;
@@ -6,33 +8,6 @@ const handleFindHeroPic = (f, q) => {
 const handleSetData = (setMatchData, data) => {
   setMatchData(data);
 };
-
-// const handleSubmit = (
-//   event,
-//   matchId,
-//   setShowErrorLocal,
-//   setShowError,
-//   getResult,
-//   router
-// ) => {
-//   setShowData(false);
-//   event.preventDefault();
-//   setShowErrorLocal(null);
-//   setShowError(null);
-//   if (!isNaN(matchId)) {
-//     if (Number(matchId) !== 0) {
-//       getResult({ variables: { id: Number(matchId) } });
-//       router.push(`http://localhost:3000/match/${matchId}`);
-//     } else {
-//       setShowErrorLocal("Please enter your match ID");
-//       setShowError("please enter your match ID");
-//     }
-//   } else {
-//     setShowErrorLocal("Please enter your match ID");
-//     setShowError("please enter your match ID");
-//   }
-// };
-
 const handlePreSetMatchId = (
   setShowError,
   setShowData,
@@ -101,11 +76,15 @@ const handlePick = (pick) => {
   }
 };
 
+const handleFindHeroName = (id) => {
+  return heroesName.find((element) => element.id === id);
+};
+
 module.exports = {
   handleSetData,
-  // handleSubmit,
   handleShowPickBan,
   handlePick,
   handleFindHeroPic,
   handlePreSetMatchId,
+  handleFindHeroName,
 };
