@@ -1,9 +1,9 @@
 import calc from "./calc";
-import handle from "./handlers";
+import handler from "./handlers";
 
 const func = {
   calc,
-  handle,
+  handler,
 };
 
 export default func;

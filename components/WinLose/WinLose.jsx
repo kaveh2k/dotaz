@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
-import { killCalc, timeCalc } from "@/func/calcData";
+import func from "@/func";
 import useMatchStore from "@/store/matchStore";
 import { forwardRef } from "react";
 import { Skeleton } from "@mui/material";
@@ -8,6 +8,8 @@ import { Skeleton } from "@mui/material";
 // TODO: show Skeleton
 
 const WinLose = forwardRef(function WinLose(props, ref) {
+  const { killCalc, timeCalc } = func.calc;
+
   const { matchData } = useMatchStore();
 
   const [time, setTime] = useState();

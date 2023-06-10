@@ -1,10 +1,12 @@
-import { handleShowPickBan } from "@/func/handle";
+import func from "@/func";
 import useMatchStore from "@/store/matchStore";
 import { useEffect, useState } from "react";
 import ShowHeroPick from "./ShowHeroPick";
 import { forwardRef } from "react";
 
 const Pick = forwardRef(function Pick({ children }, ref) {
+  const { handleShowPickBan } = func.handler;
+
   const { pick } = useMatchStore();
 
   const [heroId, setHeroId] = useState(null);
