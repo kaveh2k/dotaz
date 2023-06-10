@@ -2,8 +2,9 @@ import { handleShowPickBan } from "@/func/handle";
 import useMatchStore from "@/store/matchStore";
 import { useEffect, useState } from "react";
 import ShowHeroPick from "./ShowHeroPick";
+import { forwardRef } from "react";
 
-const Pick = ({ ref, children }) => {
+const Pick = forwardRef(function Pick({ children }, ref) {
   const { pick } = useMatchStore();
 
   const [heroId, setHeroId] = useState(null);
@@ -39,6 +40,6 @@ const Pick = ({ ref, children }) => {
       </div>
     </>
   );
-};
+});
 
 export default Pick;

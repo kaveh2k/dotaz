@@ -2,10 +2,11 @@ import React from "react";
 import Image from "next/image";
 import { killCalc, timeCalc } from "@/func/calcData";
 import useMatchStore from "@/store/matchStore";
+import { forwardRef } from "react";
 
 // TODO: show Skeleton
 
-const WinLose = ({ ref }) => {
+const WinLose = forwardRef(function WinLose(props, ref) {
   const { matchData } = useMatchStore();
 
   return (
@@ -50,6 +51,6 @@ const WinLose = ({ ref }) => {
       </div>
     </>
   );
-};
+});
 
 export default WinLose;
