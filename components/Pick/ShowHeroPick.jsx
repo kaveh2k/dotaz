@@ -10,11 +10,8 @@ import Skeleton from "@mui/material/Skeleton";
 
 import Tooltip from "@mui/material/Tooltip";
 
-// TODO: create loading func
-// TODO: show tooltip on pics
 // TODO: delete API
 // TODO: change tesFunc name
-// TODO: show Skeleton
 
 const ShowHeroPick = ({ children, cn }) => {
   const [heroNameFind, setHeroNameFind] = useState([]);
