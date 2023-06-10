@@ -2,7 +2,6 @@ import { handleShowPickBan } from "@/func/handle";
 import useMatchStore from "@/store/matchStore";
 import { useEffect, useState } from "react";
 import ShowHeroBan from "./ShowHeroBan";
-import Tooltip from "@mui/material/Tooltip";
 
 const Ban = ({ ref, children }) => {
   const { pick } = useMatchStore();

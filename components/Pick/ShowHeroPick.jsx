@@ -8,8 +8,12 @@ import { handleFindHeroPic } from "@/func/handle";
 
 import Skeleton from "@mui/material/Skeleton";
 
+import Tooltip from "@mui/material/Tooltip";
+
 // TODO: create loading func
 // TODO: show tooltip on pics
+// TODO: delete API
+// TODO: change tesFunc name
 // TODO: show Skeleton
 
 const ShowHeroPick = ({ children, cn }) => {
@@ -21,7 +25,7 @@ const ShowHeroPick = ({ children, cn }) => {
   const [getHero, { data, loading }] = useLazyQuery(heroData);
 
   useEffect(() => {
-    getHero({ variables: { id: Number(children) } });
+    getHero({ variables: { id: Number(children[0]) } });
   }, []);
 
   useEffect(() => {
@@ -71,7 +75,10 @@ const ShowHeroPick = ({ children, cn }) => {
           />
         ) : (
           showData && (
-            <>
+            <Tooltip
+              title={data.constants.hero.displayName}
+              placement={children[1] === "Radiant" ? "left" : "right"}
+            >
               <Image
                 alt={resultFinder}
                 className="rounded-md"
@@ -79,7 +86,7 @@ const ShowHeroPick = ({ children, cn }) => {
                 width={70}
                 height={70}
               />
-            </>
+            </Tooltip>
           )
         )}
       </div>
