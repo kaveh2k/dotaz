@@ -7,8 +7,6 @@ import { handleFindHeroPic, handleFindHeroName } from "@/func/handle";
 import Skeleton from "@mui/material/Skeleton";
 import { Tooltip } from "@mui/material";
 
-// TODO: delete API req and take it from database
-
 const ShowHeroBan = ({ children, cn }) => {
   const [heroNameFind, setHeroNameFind] = useState([]);
   const [showData, setShowData] = useState(false);
@@ -18,12 +16,10 @@ const ShowHeroBan = ({ children, cn }) => {
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState();
 
-  //const [getHero, { data, loading }] = useLazyQuery(heroData);
-
+  // ********************************************************
   useEffect(() => {
     setLoading(true);
     setData(handleFindHeroName(Number(children)));
-    // getHero({ variables: { id: Number(children) } });
   }, []);
 
   useEffect(() => {
