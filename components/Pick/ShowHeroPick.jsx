@@ -2,13 +2,15 @@ import { useEffect, useState } from "react";
 
 import fuse from "@/engine/searchPic.eangine";
 import Image from "next/image";
-import { handleFindHeroPic, handleFindHeroName } from "@/func/handle";
+import func from "@/func";
 
 import Skeleton from "@mui/material/Skeleton";
 
 import Tooltip from "@mui/material/Tooltip";
 
 const ShowHeroPick = ({ children, cn }) => {
+  const { handleFindHeroPic, handleFindHeroName } = func.handler;
+
   const [heroNameFind, setHeroNameFind] = useState([]);
   const [showData, setShowData] = useState(false);
   const [searchFinder, setSearchFinder] = useState();
