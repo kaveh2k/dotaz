@@ -3,9 +3,7 @@ import Image from "next/image";
 import { killCalc, timeCalc } from "@/func/calcData";
 import useMatchStore from "@/store/matchStore";
 import { forwardRef } from "react";
-import { Skeleton } from "@mui/material";
-
-// TODO: show Skeleton
+import { Skeleton, Tooltip } from "@mui/material";
 
 const WinLose = forwardRef(function WinLose(props, ref) {
   const { matchData } = useMatchStore();
@@ -38,17 +36,19 @@ const WinLose = forwardRef(function WinLose(props, ref) {
               />
             ) : (
               <>
-                <Image
-                  className={
-                    matchData.match.didRadiantWin
-                      ? "rounded-md"
-                      : "rounded-md filter grayscale"
-                  }
-                  src="/Radiant_icon.png"
-                  alt="Radiant"
-                  width={120}
-                  height={120}
-                />
+                <Tooltip title="Radiant" placement="top">
+                  <Image
+                    className={
+                      matchData.match.didRadiantWin
+                        ? "rounded-md"
+                        : "rounded-md filter grayscale"
+                    }
+                    src="/Radiant_icon.png"
+                    alt="Radiant"
+                    width={120}
+                    height={120}
+                  />
+                </Tooltip>
                 <p>Kills: {radiantScore}</p>
               </>
             )}
@@ -63,17 +63,19 @@ const WinLose = forwardRef(function WinLose(props, ref) {
               />
             ) : (
               <>
-                <Image
-                  className={
-                    matchData.match.didRadiantWin
-                      ? "rounded-md filter grayscale"
-                      : "rounded-md"
-                  }
-                  src="/Dire_icon.png"
-                  alt="Dire"
-                  width={120}
-                  height={120}
-                />
+                <Tooltip title="Dire" placement="top">
+                  <Image
+                    className={
+                      matchData.match.didRadiantWin
+                        ? "rounded-md filter grayscale"
+                        : "rounded-md"
+                    }
+                    src="/Dire_icon.png"
+                    alt="Dire"
+                    width={120}
+                    height={120}
+                  />
+                </Tooltip>
                 <p>Kills: {direScore}</p>
               </>
             )}
