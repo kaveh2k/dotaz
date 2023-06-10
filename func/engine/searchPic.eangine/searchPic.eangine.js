@@ -10,5 +10,3 @@ const options = {
 const fuse = new Fuse(heroIconName, options);
 
 export default fuse;
-
-// TODO: put it to func folder

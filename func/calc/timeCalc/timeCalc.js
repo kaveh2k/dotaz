@@ -1,5 +1,3 @@
-//TODO: for each func create seperate file
-
 const timeCalc = (durationSeconds) => {
   const floorMinute = Math.floor(durationSeconds / 60);
   const diffFloorSeconds = durationSeconds - floorMinute * 60;
