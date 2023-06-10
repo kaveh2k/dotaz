@@ -7,6 +7,7 @@ import Image from "next/image";
 import { handleFindHeroPic } from "@/func/handle";
 
 import Skeleton from "@mui/material/Skeleton";
+import { Tooltip } from "@mui/material";
 
 // TODO: create loading func
 // TODO: show tooltip on pics
@@ -72,7 +73,10 @@ const ShowHeroBan = ({ children, cn }) => {
           />
         ) : (
           showData && (
-            <>
+            <Tooltip
+              title={data.constants.hero.displayName}
+              placement="top-start"
+            >
               <Image
                 alt={resultFinder}
                 className="rounded-md filter grayscale"
@@ -80,7 +84,7 @@ const ShowHeroBan = ({ children, cn }) => {
                 width={40}
                 height={40}
               />
-            </>
+            </Tooltip>
           )
         )}
       </div>

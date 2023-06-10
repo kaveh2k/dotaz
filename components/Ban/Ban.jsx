@@ -30,9 +30,9 @@ const Ban = ({ ref, children }) => {
         <div className="flex flex-wrap justify-center items-center">
           {heroId !== null ? (
             heroId.map((h, i) => (
-              <div key={i}>
-                <ShowHeroBan cn="mr-1 p-1">{h}</ShowHeroBan>
-              </div>
+              <ShowHeroBan key={i} cn="mr-1 p-1">
+                {h}
+              </ShowHeroBan>
             ))
           ) : (
             <p>No Ban Info</p>
