@@ -1,31 +1,29 @@
-import { useLazyQuery } from "@apollo/client";
 import { useEffect, useState } from "react";
-import { heroData } from "@/graphql/heroData.gql";
 
 import fuse from "@/engine/searchPic.eangine";
 import Image from "next/image";
-import { handleFindHeroPic } from "@/func/handle";
+import func from "@/func";
 
 import Skeleton from "@mui/material/Skeleton";
 
 import Tooltip from "@mui/material/Tooltip";
 
-// TODO: create loading func
-// TODO: show tooltip on pics
-// TODO: delete API
-// TODO: change tesFunc name
-// TODO: show Skeleton
-
 const ShowHeroPick = ({ children, cn }) => {
+  const { handleFindHeroPic, handleFindHeroName } = func.handler;
+
   const [heroNameFind, setHeroNameFind] = useState([]);
   const [showData, setShowData] = useState(false);
   const [searchFinder, setSearchFinder] = useState();
   const [resultFinder, setResultFinder] = useState();
 
-  const [getHero, { data, loading }] = useLazyQuery(heroData);
+  const [loading, setLoading] = useState(true);
+  const [data, setData] = useState();
+
+  // ********************************************************
 
   useEffect(() => {
-    getHero({ variables: { id: Number(children[0]) } });
+    setLoading(true);
+    setData(handleFindHeroName(Number(children[0])));
   }, []);
 
   useEffect(() => {
@@ -35,19 +33,19 @@ const ShowHeroPick = ({ children, cn }) => {
 
   useEffect(() => {
     if (data !== undefined) {
-      setHeroNameFind(data.constants.hero.displayName);
+      setHeroNameFind(data.displayName);
     }
   }, [data]);
 
   // ********************************************************
 
   useEffect(() => {
-    const tesFunc = async () => {
+    const heroFindFunc = async () => {
       const promiseFind = await handleFindHeroPic(fuse, heroNameFind);
       const arrayFind = Array.from(promiseFind);
       setSearchFinder(arrayFind[0]);
     };
-    tesFunc();
+    heroFindFunc();
   }, [heroNameFind]);
 
   useEffect(() => {
@@ -58,6 +56,7 @@ const ShowHeroPick = ({ children, cn }) => {
     ) {
       setResultFinder(String(searchFinder.item.name));
       setShowData(true);
+      setLoading(false);
     }
   }, [searchFinder]);
 
@@ -76,7 +75,7 @@ const ShowHeroPick = ({ children, cn }) => {
         ) : (
           showData && (
             <Tooltip
-              title={data.constants.hero.displayName}
+              title={data.displayName}
               placement={children[1] === "Radiant" ? "left" : "right"}
             >
               <Image

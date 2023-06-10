@@ -13,7 +13,7 @@ import WinLose from "@/components/WinLose/WinLose";
 import CircularProgress from "@mui/material/CircularProgress";
 import Backdrop from "@mui/material/Backdrop";
 
-import { handleSetData, handlePick, handlePreSetMatchId } from "@/func/handle";
+import func from "@/func";
 
 import Form from "@/components/Form/From";
 
@@ -23,6 +23,8 @@ import Ban from "@/components/Ban/Ban";
 import { useRouter } from "next/navigation";
 
 const MatchInfo = ({ params }) => {
+  const { handleSetData, handlePick, handlePreSetMatchId } = func.handler;
+
   const {
     setMatchData,
     setPick,

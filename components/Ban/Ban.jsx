@@ -1,12 +1,15 @@
-import { handleShowPickBan } from "@/func/handle";
+import func from "@/func";
 import useMatchStore from "@/store/matchStore";
 import { useEffect, useState } from "react";
 import ShowHeroBan from "./ShowHeroBan";
+import { forwardRef } from "react";
 
-const Ban = ({ ref, children }) => {
+const Ban = forwardRef(function Ban({ children }, ref) {
   const { pick } = useMatchStore();
 
   const [heroId, setHeroId] = useState(null);
+
+  const { handleShowPickBan } = func.handler;
 
   useEffect(() => {
     if (pick !== null) {
@@ -40,6 +43,6 @@ const Ban = ({ ref, children }) => {
       </div>
     </>
   );
-};
+});
 
 export default Ban;

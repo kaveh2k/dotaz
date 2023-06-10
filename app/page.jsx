@@ -4,7 +4,8 @@ import { useRef } from "react";
 import useMatchStore from "@/store/matchStore";
 import { useRouter } from "next/navigation";
 
-// todo: create database for pictures and hero name request
+// TODO: create online database for pictures and hero name request
+// FIXME: fix SSR and CSR for whole applicaton
 
 const MatchInfo = () => {
   const inputNumRef = useRef();

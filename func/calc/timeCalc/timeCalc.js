@@ -10,15 +10,4 @@ const timeCalc = (durationSeconds) => {
   return matchExactTime;
 };
 
-const killCalc = (eachTeamKills) => {
-  let sum = 0;
-  eachTeamKills.map((kill) => {
-    sum = kill + sum;
-  });
-  return sum;
-};
-
-module.exports = {
-  timeCalc,
-  killCalc,
-};
+export default timeCalc;

@@ -1,51 +1,50 @@
-import { useLazyQuery } from "@apollo/client";
 import { useEffect, useState } from "react";
-import { heroData } from "@/graphql/heroData.gql";
 
 import fuse from "@/engine/searchPic.eangine";
 import Image from "next/image";
-import { handleFindHeroPic } from "@/func/handle";
+
+import func from "@/func";
 
 import Skeleton from "@mui/material/Skeleton";
 import { Tooltip } from "@mui/material";
 
-// TODO: create loading func
-// TODO: show tooltip on pics
-// TODO: delete API req and take it from database
-// TODO: show Skeleton
-
 const ShowHeroBan = ({ children, cn }) => {
+  // ********************************************************
+  const { handleFindHeroPic, handleFindHeroName } = func.handler;
+
   const [heroNameFind, setHeroNameFind] = useState([]);
   const [showData, setShowData] = useState(false);
   const [searchFinder, setSearchFinder] = useState();
   const [resultFinder, setResultFinder] = useState();
 
-  const [getHero, { data, loading }] = useLazyQuery(heroData);
+  const [loading, setLoading] = useState(true);
+  const [data, setData] = useState();
 
+  // ********************************************************
   useEffect(() => {
-    getHero({ variables: { id: Number(children) } });
+    setLoading(true);
+    setData(handleFindHeroName(Number(children)));
   }, []);
 
   useEffect(() => {
     setResultFinder("");
     setSearchFinder(undefined);
   }, []);
-
-  useEffect(() => {
-    if (data !== undefined) {
-      setHeroNameFind(data.constants.hero.displayName);
-    }
-  }, [data]);
-
   // ********************************************************
 
   useEffect(() => {
-    const tesFunc = async () => {
+    if (data !== undefined) {
+      setHeroNameFind(data.displayName);
+    }
+  }, [data]);
+
+  useEffect(() => {
+    const heroFindFunc = async () => {
       const promiseFind = await handleFindHeroPic(fuse, heroNameFind);
       const arrayFind = Array.from(promiseFind);
       setSearchFinder(arrayFind[0]);
     };
-    tesFunc();
+    heroFindFunc();
   }, [heroNameFind]);
 
   useEffect(() => {
@@ -56,6 +55,7 @@ const ShowHeroBan = ({ children, cn }) => {
     ) {
       setResultFinder(String(searchFinder.item.name));
       setShowData(true);
+      setLoading(false);
     }
   }, [searchFinder]);
 
@@ -73,10 +73,7 @@ const ShowHeroBan = ({ children, cn }) => {
           />
         ) : (
           showData && (
-            <Tooltip
-              title={data.constants.hero.displayName}
-              placement="top-start"
-            >
+            <Tooltip title={data.displayName} placement="top-start">
               <Image
                 alt={resultFinder}
                 className="rounded-md filter grayscale"
