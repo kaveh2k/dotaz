@@ -10,6 +10,7 @@ import Skeleton from "@mui/material/Skeleton";
 
 // TODO: create loading func
 // TODO: show tooltip on pics
+// TODO: delete API req and take it from database
 // TODO: show Skeleton
 
 const ShowHeroBan = ({ children, cn }) => {

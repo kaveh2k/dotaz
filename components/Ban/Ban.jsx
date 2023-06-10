@@ -2,6 +2,7 @@ import { handleShowPickBan } from "@/func/handle";
 import useMatchStore from "@/store/matchStore";
 import { useEffect, useState } from "react";
 import ShowHeroBan from "./ShowHeroBan";
+import Tooltip from "@mui/material/Tooltip";
 
 const Ban = ({ ref, children }) => {
   const { pick } = useMatchStore();
@@ -29,9 +30,9 @@ const Ban = ({ ref, children }) => {
         <div className="flex flex-wrap justify-center items-center">
           {heroId !== null ? (
             heroId.map((h, i) => (
-              <ShowHeroBan key={i} cn="mr-1 p-1">
-                {h}
-              </ShowHeroBan>
+              <div key={i}>
+                <ShowHeroBan cn="mr-1 p-1">{h}</ShowHeroBan>
+              </div>
             ))
           ) : (
             <p>No Ban Info</p>

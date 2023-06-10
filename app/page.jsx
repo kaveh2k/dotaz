@@ -4,6 +4,8 @@ import { useRef } from "react";
 import useMatchStore from "@/store/matchStore";
 import { useRouter } from "next/navigation";
 
+// todo: create database for pictures and hero name request
+
 const MatchInfo = () => {
   const inputNumRef = useRef();
   const { setMatchId } = useMatchStore();
