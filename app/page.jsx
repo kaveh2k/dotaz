@@ -11,14 +11,14 @@ const MatchInfo = () => {
   const { setMatchId } = useMatchStore();
 
   const router = useRouter();
-
+  // *************************************
   const handleSubmitWrapper = (e) => {
     e.preventDefault();
     const matchId = inputNumRef.current.value;
     setMatchId(inputNumRef.current.value);
     router.push(`http://localhost:3000/match/${matchId}`);
   };
-
+  // *************************************
   return (
     <div className="flex justify-center items-center h-2/6 min-h-screen ">
       <div className="bg-gray-800 shadow-md rounded-md p-8 w-2/4 grid auto-rows-min">
