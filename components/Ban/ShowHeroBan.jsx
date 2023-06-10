@@ -1,6 +1,4 @@
-import { useLazyQuery } from "@apollo/client";
 import { useEffect, useState } from "react";
-import { heroData } from "@/graphql/heroData.gql";
 
 import fuse from "@/engine/searchPic.eangine";
 import Image from "next/image";
@@ -76,10 +74,7 @@ const ShowHeroBan = ({ children, cn }) => {
           />
         ) : (
           showData && (
-            <Tooltip
-              title={data.constants.hero.displayName}
-              placement="top-start"
-            >
+            <Tooltip title={data.displayName} placement="top-start">
               <Image
                 alt={resultFinder}
                 className="rounded-md filter grayscale"
