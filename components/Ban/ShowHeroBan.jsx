@@ -8,6 +8,7 @@ import Skeleton from "@mui/material/Skeleton";
 import { Tooltip } from "@mui/material";
 
 const ShowHeroBan = ({ children, cn }) => {
+  // ********************************************************
   const [heroNameFind, setHeroNameFind] = useState([]);
   const [showData, setShowData] = useState(false);
   const [searchFinder, setSearchFinder] = useState();
@@ -26,14 +27,13 @@ const ShowHeroBan = ({ children, cn }) => {
     setResultFinder("");
     setSearchFinder(undefined);
   }, []);
+  // ********************************************************
 
   useEffect(() => {
     if (data !== undefined) {
       setHeroNameFind(data.displayName);
     }
   }, [data]);
-
-  // ********************************************************
 
   useEffect(() => {
     const heroFindFunc = async () => {

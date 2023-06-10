@@ -1,3 +1,5 @@
+// FIXME: create flder for each funcs
+
 import { heroesName } from "@/model/heroesNameAndID.model";
 
 const handleFindHeroPic = (f, q) => {
