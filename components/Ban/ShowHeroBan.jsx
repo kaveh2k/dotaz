@@ -35,6 +35,8 @@ const ShowHeroBan = ({ children, cn }) => {
 
   // ********************************************************
 
+  // TODO: change tesFunc name
+
   useEffect(() => {
     const tesFunc = async () => {
       const promiseFind = await handleFindHeroPic(fuse, heroNameFind);

@@ -4,14 +4,11 @@ import { heroData } from "@/graphql/heroData.gql";
 
 import fuse from "@/engine/searchPic.eangine";
 import Image from "next/image";
-import { handleFindHeroPic } from "@/func/handle";
+import { handleFindHeroPic, handleFindHeroName } from "@/func/handle";
 
 import Skeleton from "@mui/material/Skeleton";
 
 import Tooltip from "@mui/material/Tooltip";
-
-// TODO: delete API
-// TODO: change tesFunc name
 
 const ShowHeroPick = ({ children, cn }) => {
   const [heroNameFind, setHeroNameFind] = useState([]);
@@ -19,10 +16,15 @@ const ShowHeroPick = ({ children, cn }) => {
   const [searchFinder, setSearchFinder] = useState();
   const [resultFinder, setResultFinder] = useState();
 
-  const [getHero, { data, loading }] = useLazyQuery(heroData);
+  const [loading, setLoading] = useState(true);
+  const [data, setData] = useState();
 
+  //const [getHero, { data, loading }] = useLazyQuery(heroData);
+
+  // ********************************************************
   useEffect(() => {
-    getHero({ variables: { id: Number(children[0]) } });
+    setLoading(true);
+    setData(handleFindHeroName(Number(children)));
   }, []);
 
   useEffect(() => {
@@ -32,11 +34,13 @@ const ShowHeroPick = ({ children, cn }) => {
 
   useEffect(() => {
     if (data !== undefined) {
-      setHeroNameFind(data.constants.hero.displayName);
+      setHeroNameFind(data.displayName);
     }
   }, [data]);
 
   // ********************************************************
+
+  // TODO: change tesFunc name
 
   useEffect(() => {
     const tesFunc = async () => {
@@ -55,6 +59,7 @@ const ShowHeroPick = ({ children, cn }) => {
     ) {
       setResultFinder(String(searchFinder.item.name));
       setShowData(true);
+      setLoading(false);
     }
   }, [searchFinder]);
 
@@ -73,7 +78,7 @@ const ShowHeroPick = ({ children, cn }) => {
         ) : (
           showData && (
             <Tooltip
-              title={data.constants.hero.displayName}
+              title={data.displayName}
               placement={children[1] === "Radiant" ? "left" : "right"}
             >
               <Image
