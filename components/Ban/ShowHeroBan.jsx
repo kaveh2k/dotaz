@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
 
-import fuse from "@/engine/searchPic.eangine";
 import Image from "next/image";
 
 import func from "@/func";
@@ -10,13 +9,10 @@ import { Tooltip } from "@mui/material";
 
 const ShowHeroBan = ({ children, cn }) => {
   // ********************************************************
-  const { handleFindHeroPic, handleFindHeroName } = func.handler;
+  const { handleHeroFindFunc, handleFindHeroName } = func.handler;
 
-  const [heroNameFind, setHeroNameFind] = useState([]);
   const [showData, setShowData] = useState(false);
-  const [searchFinder, setSearchFinder] = useState();
   const [resultFinder, setResultFinder] = useState();
-
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState();
 
@@ -24,40 +20,26 @@ const ShowHeroBan = ({ children, cn }) => {
   useEffect(() => {
     setLoading(true);
     setData(handleFindHeroName(Number(children)));
+    setResultFinder("");
   }, []);
 
-  useEffect(() => {
-    setResultFinder("");
-    setSearchFinder(undefined);
-  }, []);
   // ********************************************************
 
   useEffect(() => {
     if (data !== undefined) {
-      setHeroNameFind(data.displayName);
+      const searchFinder = handleHeroFindFunc(data.displayName);
+      if (
+        searchFinder !== undefined &&
+        searchFinder !== null &&
+        searchFinder != "" &&
+        searchFinder
+      ) {
+        setResultFinder(String(searchFinder.item.name));
+        setShowData(true);
+        setLoading(false);
+      }
     }
   }, [data]);
-
-  useEffect(() => {
-    const heroFindFunc = async () => {
-      const promiseFind = await handleFindHeroPic(fuse, heroNameFind);
-      const arrayFind = Array.from(promiseFind);
-      setSearchFinder(arrayFind[0]);
-    };
-    heroFindFunc();
-  }, [heroNameFind]);
-
-  useEffect(() => {
-    if (
-      searchFinder !== undefined &&
-      searchFinder !== null &&
-      searchFinder != ""
-    ) {
-      setResultFinder(String(searchFinder.item.name));
-      setShowData(true);
-      setLoading(false);
-    }
-  }, [searchFinder]);
 
   // ******************************************************
 
