@@ -27,7 +27,10 @@ const Pick = ({ ref, children }) => {
         {heroId !== null ? (
           heroId.map((h, i) => (
             <div key={i} className="flex flex-wrap justify-center items-center">
-              <ShowHeroPick cn="mb-2 mt-2">{h}</ShowHeroPick>
+              <ShowHeroPick cn="mb-2 mt-2">
+                {h}
+                {children}
+              </ShowHeroPick>
             </div>
           ))
         ) : (
