@@ -4,7 +4,7 @@ import { heroData } from "@/graphql/heroData.gql";
 
 import fuse from "@/engine/searchPic.eangine";
 import Image from "next/image";
-import { handleFindHeroPic } from "@/func/handle";
+import { handleFindHeroPic, handleFindHeroName } from "@/func/handle";
 
 import Skeleton from "@mui/material/Skeleton";
 import { Tooltip } from "@mui/material";
@@ -17,10 +17,15 @@ const ShowHeroBan = ({ children, cn }) => {
   const [searchFinder, setSearchFinder] = useState();
   const [resultFinder, setResultFinder] = useState();
 
-  const [getHero, { data, loading }] = useLazyQuery(heroData);
+  const [loading, setLoading] = useState(true);
+  const [data, setData] = useState();
+
+  //const [getHero, { data, loading }] = useLazyQuery(heroData);
 
   useEffect(() => {
-    getHero({ variables: { id: Number(children) } });
+    setLoading(true);
+    setData(handleFindHeroName(Number(children)));
+    // getHero({ variables: { id: Number(children) } });
   }, []);
 
   useEffect(() => {
@@ -30,7 +35,7 @@ const ShowHeroBan = ({ children, cn }) => {
 
   useEffect(() => {
     if (data !== undefined) {
-      setHeroNameFind(data.constants.hero.displayName);
+      setHeroNameFind(data.displayName);
     }
   }, [data]);
 
@@ -53,6 +58,7 @@ const ShowHeroBan = ({ children, cn }) => {
     ) {
       setResultFinder(String(searchFinder.item.name));
       setShowData(true);
+      setLoading(false);
     }
   }, [searchFinder]);
 
