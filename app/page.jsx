@@ -6,6 +6,13 @@ import { useRouter } from "next/navigation";
 
 // TODO: create online database for pictures and hero name request
 // FIXME: fix SSR and CSR for whole applicaton
+// FIXME: import SSR to CSR as a children
+// TODO: add loading.jsx to all pages, use <Suspense></Suspense>, it only works for server clients
+// FIXME: use data.ok for fetching (if possible)
+// TODO: add not-found.jsx or notfound() from next/navigation for 404 and false data
+// TODO: turn off auto merge for git
+// TODO: add error.jsx
+// TODO: add api folder
 
 const MatchInfo = () => {
   const inputNumRef = useRef();
