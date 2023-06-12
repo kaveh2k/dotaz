@@ -4,15 +4,17 @@ import { useRef } from "react";
 import useMatchStore from "@/store/matchStore";
 import { useRouter } from "next/navigation";
 
-// TODO: create online database for pictures and hero name request
+// FIXME: use data.ok for fetching (if possible)
 // FIXME: fix SSR and CSR for whole applicaton
 // FIXME: import SSR to CSR as a children
+
+// TODO: create online database for pictures and hero name request
 // TODO: add loading.jsx to all pages, use <Suspense></Suspense>, it only works for server clients
-// FIXME: use data.ok for fetching (if possible)
 // TODO: add not-found.jsx or notfound() from next/navigation for 404 and false data
 // TODO: turn off auto merge for git
 // TODO: add error.jsx
 // TODO: add api folder
+// TODO: add milion.js
 
 const MatchInfo = () => {
   const inputNumRef = useRef();
