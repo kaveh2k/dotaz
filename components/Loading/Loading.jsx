@@ -1,0 +1,22 @@
+import { Backdrop, CircularProgress } from "@mui/material";
+import React from "react";
+
+const Loading = ({ loading }) => {
+  return (
+    <>
+      {loading && (
+        <Backdrop
+          sx={{
+            color: "#fff",
+            zIndex: (theme) => theme.zIndex.drawer + 1,
+          }}
+          open={loading}
+        >
+          <CircularProgress width={210} height={118} color="error" />
+        </Backdrop>
+      )}
+    </>
+  );
+};
+
+export default Loading;

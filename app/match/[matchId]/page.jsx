@@ -8,9 +8,6 @@ import useMatchStore from "@/store/matchStore";
 
 import WinLose from "@/components/WinLose/WinLose";
 
-import CircularProgress from "@mui/material/CircularProgress";
-import Backdrop from "@mui/material/Backdrop";
-
 import func from "@/func";
 
 import Form from "@/components/Form/From";
@@ -18,10 +15,11 @@ import Form from "@/components/Form/From";
 import Pick from "@/components/Pick/Pick";
 import Ban from "@/components/Ban/Ban";
 import { useRouter } from "next/navigation";
-import axios from "axios";
+
+import Loading from "@/components/Loading/Loading";
 
 const MatchInfo = ({ params }) => {
-  const { handleSetData, handlePick } = func.handler;
+  const { handleFetchMatchData, handleDataExist } = func.handler;
 
   const {
     setMatchData,
@@ -56,61 +54,31 @@ const MatchInfo = ({ params }) => {
   };
   // ********************************************************
   useEffect(() => {
-    setLoading(true);
-    setShowErrorLocal(showError);
-    setShowError(null);
-    setShowData(false);
-    const perSetMatchId = params.matchId;
-    if (!isNaN(perSetMatchId)) {
-      if (Number(perSetMatchId) !== 0) {
-        axios
-          .post(`${process.env.NEXT_PUBLIC_MATCHES_URL}${perSetMatchId}`)
-          .then(async (response) => {
-            console.log(response.data);
-            setData(response.data);
-          })
-          .catch((error) => {
-            console.log("error", error);
-            setShowErrorLocal("please enter your match ID");
-            setShowError("please enter your match ID");
-            setLoading(false);
-          });
-      } else {
-        setShowErrorLocal("please enter your match ID");
-        setShowError("please enter your match ID");
-        setLoading(false);
-      }
-    } else {
-      setShowErrorLocal("please enter your match ID");
-      setShowError("please enter your match ID");
-      setLoading(false);
-    }
+    handleFetchMatchData(
+      setLoading,
+      setShowErrorLocal,
+      setShowError,
+      setShowData,
+      params,
+      setData,
+      showError
+    );
   }, []);
 
   // ********************************************************
 
   useEffect(() => {
     if (data) {
-      const arrCheck = Object.values(data);
-      setExtractedObject(arrCheck[0]);
-      if (arrCheck[0]) {
-        if (arrCheck[0].durationSeconds) {
-          handleSetData(setMatchData, arrCheck[0]);
-          setPick(handlePick(arrCheck[0].pickBans));
-          setShowData(true);
-          setLoading(false);
-        } else {
-          setShowError("error code: 1 ");
-          setShowErrorLocal("error code: 1 ");
-          setShowData(false);
-          setLoading(false);
-        }
-      } else {
-        setShowError("error code: 2");
-        setShowErrorLocal("error code: 2");
-        setShowData(false);
-        setLoading(false);
-      }
+      handleDataExist(
+        data,
+        setExtractedObject,
+        setPick,
+        setShowData,
+        setLoading,
+        setShowError,
+        setShowErrorLocal,
+        setMatchData
+      );
     }
   }, [data]);
 
@@ -119,17 +87,7 @@ const MatchInfo = ({ params }) => {
   return (
     <div className="flex justify-center items-center h-2/6 min-h-screen ">
       <div className="bg-gray-800 shadow-md rounded-md p-8 w-2/4 grid auto-rows-min">
-        {loading && (
-          <Backdrop
-            sx={{
-              color: "#fff",
-              zIndex: (theme) => theme.zIndex.drawer + 1,
-            }}
-            open={loading}
-          >
-            <CircularProgress width={210} height={118} color="error" />
-          </Backdrop>
-        )}
+        <Loading loading={loading} />
         <Form
           v={params.matchId}
           handleSubmitWrapper={handleSubmitWrapper}

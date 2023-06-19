@@ -5,6 +5,8 @@ FIXME: use .env file for server side
 FIXME: create a loading for first page
 
 
+
+TODO: add page routes and delete some func's
 TODO: add loading.jsx to all pages, use <Suspense></Suspense>, it only works for server clients
 TODO: add not-found.jsx or notfound() from next/navigation for 404 and false data
 TODO: add error.jsx
