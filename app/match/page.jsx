@@ -9,7 +9,7 @@ const Match = () => {
 
   useEffect(() => {
     setTimeout(() => {
-      router.push("http://localhost:3000/");
+      router.push("/");
     }, 2000);
   }, []);
 

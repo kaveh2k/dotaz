@@ -64,12 +64,13 @@ const MatchInfo = ({ params }) => {
     if (!isNaN(perSetMatchId)) {
       if (Number(perSetMatchId) !== 0) {
         axios
-          .post(`http://localhost:3060/match/${perSetMatchId}`)
+          .post(`${process.env.NEXT_PUBLIC_MATCHES_URL}${perSetMatchId}`)
           .then(async (response) => {
             console.log(response.data);
             setData(response.data);
           })
           .catch((error) => {
+            console.log("error", error);
             setShowErrorLocal("please enter your match ID");
             setShowError("please enter your match ID");
             setLoading(false);
