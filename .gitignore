@@ -36,5 +36,7 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# setup fetch files
-/components/gql/setClient.js
+# TODO_files
+.todo
+
+
