@@ -11,15 +11,20 @@ const WinLose = forwardRef(function WinLose(props, ref) {
   const { matchData } = useMatchStore();
 
   const [time, setTime] = useState();
-  const [radiantScore, setRadiant] = useState();
+  const [radiantScore, setRadiantScore] = useState();
   const [direScore, setDireScore] = useState();
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     setLoading(true);
-    setTime(timeCalc(matchData.match.durationSeconds));
-    setRadiant(killCalc(matchData.match.radiantKills));
-    setDireScore(killCalc(matchData.match.direKills));
+    setTime(timeCalc(matchData.durationSeconds));
+    if (matchData.radiantKills && matchData.direKills) {
+      setRadiantScore(killCalc(matchData.radiantKills));
+      setDireScore(killCalc(matchData.direKills));
+    } else {
+      setRadiantScore("no Score availabe");
+      setDireScore("no Score availabe");
+    }
     setLoading(false);
   }, []);
 
@@ -41,7 +46,7 @@ const WinLose = forwardRef(function WinLose(props, ref) {
                 <Tooltip title="Radiant" placement="top">
                   <Image
                     className={
-                      matchData.match.didRadiantWin
+                      matchData.didRadiantWin
                         ? "rounded-md"
                         : "rounded-md filter grayscale"
                     }
@@ -68,7 +73,7 @@ const WinLose = forwardRef(function WinLose(props, ref) {
                 <Tooltip title="Dire" placement="top">
                   <Image
                     className={
-                      matchData.match.didRadiantWin
+                      matchData.didRadiantWin
                         ? "rounded-md filter grayscale"
                         : "rounded-md"
                     }
@@ -84,7 +89,7 @@ const WinLose = forwardRef(function WinLose(props, ref) {
           </div>
         </div>
         <p className="text-center text-3xl">
-          {matchData.match.didRadiantWin ? "Radiant Won" : "Dire Won"}
+          {matchData.didRadiantWin ? "Radiant Won" : "Dire Won"}
         </p>
       </div>
     </>

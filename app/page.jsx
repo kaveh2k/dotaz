@@ -14,7 +14,7 @@ const MatchInfo = () => {
     e.preventDefault();
     const matchId = inputNumRef.current.value;
     setMatchId(inputNumRef.current.value);
-    router.push(`http://localhost:3000/match/${matchId}`);
+    router.push(`/match/${matchId}`);
   };
   // *************************************
   return (
@@ -24,7 +24,11 @@ const MatchInfo = () => {
           v={"Match id"}
           handleSubmitWrapper={handleSubmitWrapper}
           inputNumRef={inputNumRef}
-        ></Form>
+        >
+          <p className="text-rose-700">
+            for example use this match ID 7170144585 or 717014457
+          </p>
+        </Form>
       </div>
     </div>
   );

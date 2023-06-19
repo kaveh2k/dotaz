@@ -34,3 +34,6 @@ TODO: Secure session management:
 TODO: Perform security audits and testing
             Regularly conduct security audits and code reviews to identify and address potential security vulnerabilities.
             Perform automated security testing and vulnerability scanning using tools like OWASP ZAP, Nessus, or Snyk to detect common security issues.
+
+Discord
+TODO: add discord Bot

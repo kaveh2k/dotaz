@@ -39,6 +39,7 @@ const MatchInfo = ({ params }) => {
   const inputNumRef = useRef(null);
 
   const [showErrorLocal, setShowErrorLocal] = useState(null);
+  const [extractedObject, setExtractedObject] = useState();
 
   const [getResult, { data, loading }] = useLazyQuery(MatchData, {
     nextFetchPolicy: "network-only",
@@ -46,8 +47,13 @@ const MatchInfo = ({ params }) => {
   // ********************************************************
   const handleSubmitWrapper = (event) => {
     event.preventDefault();
-    setShowData(false);
-    router.push(`http://localhost:3000/match/${inputNumRef.current.value}`);
+    if (!(params.matchId == inputNumRef.current.value)) {
+      setShowData(false);
+      router.push(`/match/${inputNumRef.current.value}`);
+    } else {
+      setShowError("Please enter a new match ID");
+      setShowErrorLocal("Please enter a new match ID");
+    }
   };
   // ********************************************************
   useEffect(() => {
@@ -67,27 +73,20 @@ const MatchInfo = ({ params }) => {
   useEffect(() => {
     if (data) {
       const arrCheck = Object.values(data);
-      const extractedObject = arrCheck[0];
-
-      if (extractedObject) {
-        if (!Object.values(extractedObject).includes(null)) {
-          if (!arrCheck.includes(null)) {
-            handleSetData(setMatchData, data);
-            setPick(handlePick(data.match.pickBans));
-            setShowData(true);
-          } else {
-            setShowError("Please enter your match ID");
-            setShowErrorLocal("Please enter your match ID");
-            setShowData(false);
-          }
+      setExtractedObject(arrCheck[0]);
+      if (arrCheck[0]) {
+        if (arrCheck[0].durationSeconds) {
+          handleSetData(setMatchData, arrCheck[0]);
+          setPick(handlePick(arrCheck[0].pickBans));
+          setShowData(true);
         } else {
-          setShowError("No Pick Ban data available for this match ID");
-          setShowErrorLocal("No Pick Ban data available for this match ID");
+          setShowError("Please enter your match ID 1");
+          setShowErrorLocal("Please enter your match ID 1");
           setShowData(false);
         }
       } else {
-        setShowError("Please enter your match ID");
-        setShowErrorLocal("Please enter your match ID");
+        setShowError("Please enter your match ID 2");
+        setShowErrorLocal("Please enter your match ID 2");
         setShowData(false);
       }
     }
@@ -132,26 +131,26 @@ const MatchInfo = ({ params }) => {
             <div>
               <div className="grid grid-cols-4 gap-5">
                 <div className="border border-white rounded-xl mt-4 p-5 text-white ">
-                  {showData && data.match !== null ? (
+                  {showData && extractedObject !== null ? (
                     <Pick ref={ref}>Radiant</Pick>
                   ) : null}
                 </div>
 
                 <div className="col-span-2 border border-white rounded-xl mt-4 p-5 text-white ">
-                  {showData && data.match !== null ? (
+                  {showData && extractedObject !== null ? (
                     <WinLose ref={ref} />
                   ) : null}
                 </div>
 
                 <div className="border border-white rounded-xl mt-4 p-5 text-white">
-                  {showData && data.match !== null ? (
+                  {showData && extractedObject !== null ? (
                     <Pick ref={ref}>Dire</Pick>
                   ) : null}
                 </div>
 
                 <div className=" col-start-2 col-span-2 border border-white rounded-xl text-white flex flex-wrap justify-center items-center ">
                   <div className="m-3">
-                    {showData && data.match !== null ? (
+                    {showData && extractedObject !== null ? (
                       <Ban ref={ref}>Ban</Ban>
                     ) : null}
                   </div>
