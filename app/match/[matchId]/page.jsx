@@ -48,6 +48,8 @@ const MatchInfo = ({ params }) => {
   const handleSubmitWrapper = (event) => {
     event.preventDefault();
     if (!(params.matchId == inputNumRef.current.value)) {
+      setShowError("");
+      setShowErrorLocal("");
       setShowData(false);
       router.push(`/match/${inputNumRef.current.value}`);
     } else {
