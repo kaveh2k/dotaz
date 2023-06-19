@@ -14,7 +14,7 @@ const Pick = forwardRef(function Pick({ children }, ref) {
   useEffect(() => {
     if (pick !== null) {
       const arr = handleShowPickBan(pick, children);
-      // TODO: fix thix shit
+      // TODO: fix this
       const resArr = [];
       arr.map((i) => {
         resArr.push(i);
