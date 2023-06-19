@@ -1,7 +1,0 @@
-query heroData($id: Short!) {
-  constants {
-    hero(id: $id) {
-      displayName
-    }
-  }
-}

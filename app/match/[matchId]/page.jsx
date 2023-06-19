@@ -2,8 +2,6 @@
 
 import React, { useEffect, useRef, useState } from "react";
 
-import { useLazyQuery } from "@apollo/client";
-
 import { Transition } from "@headlessui/react";
 
 import useMatchStore from "@/store/matchStore";
@@ -17,13 +15,13 @@ import func from "@/func";
 
 import Form from "@/components/Form/From";
 
-import { MatchData } from "@/graphql/matchData.gql";
 import Pick from "@/components/Pick/Pick";
 import Ban from "@/components/Ban/Ban";
 import { useRouter } from "next/navigation";
+import axios from "axios";
 
 const MatchInfo = ({ params }) => {
-  const { handleSetData, handlePick, handlePreSetMatchId } = func.handler;
+  const { handleSetData, handlePick } = func.handler;
 
   const {
     setMatchData,
@@ -40,10 +38,9 @@ const MatchInfo = ({ params }) => {
 
   const [showErrorLocal, setShowErrorLocal] = useState(null);
   const [extractedObject, setExtractedObject] = useState();
+  const [data, setData] = useState();
+  const [loading, setLoading] = useState(false);
 
-  const [getResult, { data, loading }] = useLazyQuery(MatchData, {
-    nextFetchPolicy: "network-only",
-  });
   // ********************************************************
   const handleSubmitWrapper = (event) => {
     event.preventDefault();
@@ -59,15 +56,34 @@ const MatchInfo = ({ params }) => {
   };
   // ********************************************************
   useEffect(() => {
+    setLoading(true);
+    setShowErrorLocal(showError);
+    setShowError(null);
+    setShowData(false);
     const perSetMatchId = params.matchId;
-    handlePreSetMatchId(
-      setShowError,
-      setShowData,
-      perSetMatchId,
-      getResult,
-      setShowErrorLocal,
-      showError
-    );
+    if (!isNaN(perSetMatchId)) {
+      if (Number(perSetMatchId) !== 0) {
+        axios
+          .post(`http://localhost:3060/match/${perSetMatchId}`)
+          .then(async (response) => {
+            console.log(response.data);
+            setData(response.data);
+          })
+          .catch((error) => {
+            setShowErrorLocal("please enter your match ID");
+            setShowError("please enter your match ID");
+            setLoading(false);
+          });
+      } else {
+        setShowErrorLocal("please enter your match ID");
+        setShowError("please enter your match ID");
+        setLoading(false);
+      }
+    } else {
+      setShowErrorLocal("please enter your match ID");
+      setShowError("please enter your match ID");
+      setLoading(false);
+    }
   }, []);
 
   // ********************************************************
@@ -81,15 +97,18 @@ const MatchInfo = ({ params }) => {
           handleSetData(setMatchData, arrCheck[0]);
           setPick(handlePick(arrCheck[0].pickBans));
           setShowData(true);
+          setLoading(false);
         } else {
-          setShowError("Please enter your match ID 1");
-          setShowErrorLocal("Please enter your match ID 1");
+          setShowError("error code: 1 ");
+          setShowErrorLocal("error code: 1 ");
           setShowData(false);
+          setLoading(false);
         }
       } else {
-        setShowError("Please enter your match ID 2");
-        setShowErrorLocal("Please enter your match ID 2");
+        setShowError("error code: 2");
+        setShowErrorLocal("error code: 2");
         setShowData(false);
+        setLoading(false);
       }
     }
   }, [data]);
