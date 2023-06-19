@@ -39,7 +39,7 @@ npm install
 - Pick Ban: You can find pick ban details.
 - Score and Time: You can see the score, time, and the winning side.
 - In this project, I used the Fuse Algorithm to find pictures based on the given name.
-- There is a backend coded on Express to fetch data from [Stratz API](https://stratz.com/), which is a GraphQL API. It returns the response on a RESTful API. You can find the backend [project here](https://github.com/kaveh2k/dota-backend).
+- There is a backend coded on Express to fetch data from [Stratz API](https://stratz.com/), which is a GraphQL API. It returns the response on a RESTful API. You can find the backend [project here](https://github.com/kaveh2k/dotaz-backend).
 
 ## Contributing
 
