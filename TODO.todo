@@ -2,6 +2,8 @@ FIXME: use data.ok for fetching (if possible)
 FIXME: fix SSR and CSR for whole applicaton
 FIXME: import SSR to CSR as a children
 FIXME: use .env file for server side
+FIXME: create a loading for first page
+
 
 TODO: add loading.jsx to all pages, use <Suspense></Suspense>, it only works for server clients
 TODO: add not-found.jsx or notfound() from next/navigation for 404 and false data
