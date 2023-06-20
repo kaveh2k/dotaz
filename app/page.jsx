@@ -9,16 +9,15 @@ const MatchInfo = () => {
   const inputNumRef = useRef();
   const { setMatchId } = useMatchStore();
 
-  const [loading, setLoading] = useState(false);
-
+  // *************************************
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
   // *************************************
   const handleSubmitWrapper = (e) => {
     e.preventDefault();
     setLoading(true);
-    const matchId = inputNumRef.current.value;
     setMatchId(inputNumRef.current.value);
-    router.push(`/match/${matchId}`);
+    router.push(`/match/${inputNumRef.current.value}`);
   };
   // *************************************
 

@@ -8,15 +8,17 @@ import { Skeleton, Tooltip } from "@mui/material";
 const WinLose = forwardRef(function WinLose(props, ref) {
   const { killCalc, timeCalc } = func.calc;
 
+  //*********************************************
   const { matchData } = useMatchStore();
 
+  //*********************************************
   const [time, setTime] = useState();
   const [radiantScore, setRadiantScore] = useState();
   const [direScore, setDireScore] = useState();
-  const [loading, setLoading] = useState(true);
+
+  //*********************************************
 
   useEffect(() => {
-    setLoading(true);
     setTime(timeCalc(matchData.durationSeconds));
     if (matchData.radiantKills && matchData.direKills) {
       setRadiantScore(killCalc(matchData.radiantKills));
@@ -25,25 +27,30 @@ const WinLose = forwardRef(function WinLose(props, ref) {
       setRadiantScore("no Score availabe");
       setDireScore("no Score availabe");
     }
-    setLoading(false);
   }, []);
-
+  //*********************************************
+  const [imageLoading, setImageLoading] = useState(true);
+  const handleImageLoad = () => {
+    setImageLoading(false);
+  };
+  //*********************************************
   return (
     <>
       <div ref={ref}>
         <p className="text-center">Time: {time}</p>
         <div className="flex items-center justify-center space-x-10 p-8">
           <div className="flex flex-col items-center justify-center space-y-4">
-            {loading ? (
-              <Skeleton
-                variant="rectangular"
-                width={120}
-                height={120}
-                sx={{ bgcolor: "grey.800" }}
-              />
-            ) : (
-              <>
-                <Tooltip title="Radiant" placement="top">
+            <>
+              <Tooltip title="Radiant" placement="top">
+                <>
+                  {imageLoading && (
+                    <Skeleton
+                      variant="rectangular"
+                      width={120}
+                      height={120}
+                      sx={{ bgcolor: "grey.800" }}
+                    />
+                  )}
                   <Image
                     className={
                       matchData.didRadiantWin
@@ -52,25 +59,28 @@ const WinLose = forwardRef(function WinLose(props, ref) {
                     }
                     src="/Radiant_icon.png"
                     alt="Radiant"
-                    width={120}
-                    height={120}
+                    width={imageLoading ? 0 : 120}
+                    height={imageLoading ? 0 : 120}
+                    onLoad={handleImageLoad}
                   />
-                </Tooltip>
-                <p>Kills: {radiantScore}</p>
-              </>
-            )}
+                </>
+              </Tooltip>
+              <p>Kills: {radiantScore}</p>
+            </>
           </div>
+
           <div className="flex flex-col items-center justify-center space-y-4">
-            {loading ? (
-              <Skeleton
-                variant="rectangular"
-                width={120}
-                height={120}
-                sx={{ bgcolor: "grey.800" }}
-              />
-            ) : (
-              <>
-                <Tooltip title="Dire" placement="top">
+            <>
+              <Tooltip title="Dire" placement="top">
+                <>
+                  {imageLoading && (
+                    <Skeleton
+                      variant="rectangular"
+                      width={120}
+                      height={120}
+                      sx={{ bgcolor: "grey.800" }}
+                    />
+                  )}
                   <Image
                     className={
                       matchData.didRadiantWin
@@ -79,13 +89,14 @@ const WinLose = forwardRef(function WinLose(props, ref) {
                     }
                     src="/Dire_icon.png"
                     alt="Dire"
-                    width={120}
-                    height={120}
+                    width={imageLoading ? 0 : 120}
+                    height={imageLoading ? 0 : 120}
+                    onLoad={handleImageLoad}
                   />
-                </Tooltip>
-                <p>Kills: {direScore}</p>
-              </>
-            )}
+                </>
+              </Tooltip>
+              <p>Kills: {direScore}</p>
+            </>
           </div>
         </div>
         <p className="text-center text-3xl">

@@ -12,14 +12,13 @@ const ShowHeroPick = ({ children, cn }) => {
 
   const [showData, setShowData] = useState(false);
   const [resultFinder, setResultFinder] = useState();
+  const [imageLoading, setImageLoading] = useState(true);
 
-  const [loading, setLoading] = useState(true);
   const [data, setData] = useState();
 
   // ********************************************************
 
   useEffect(() => {
-    setLoading(true);
     setData(handleFindHeroName(Number(children[0])));
     setResultFinder("");
   }, []);
@@ -42,38 +41,39 @@ const ShowHeroPick = ({ children, cn }) => {
   }, [data]);
 
   // ******************************************************
-
-  useEffect(() => {
-    if (showData === true) setLoading(false);
-  }, [showData]);
-
+  // TODO: use func to get handler
+  const handleImageLoad = () => {
+    setImageLoading(false);
+  };
   // ******************************************************
 
   return (
     <>
       <div className={cn}>
-        {loading ? (
-          <Skeleton
-            variant="rectangular"
-            width={70}
-            height={70}
-            sx={{ bgcolor: "grey.800" }}
-          />
-        ) : (
-          showData && (
-            <Tooltip
-              title={data.displayName}
-              placement={children[1] === "Radiant" ? "left" : "right"}
-            >
+        {showData && (
+          <Tooltip
+            title={data.displayName}
+            placement={children[1] === "Radiant" ? "left" : "right"}
+          >
+            <>
+              {imageLoading && (
+                <Skeleton
+                  variant="rectangular"
+                  width={70}
+                  height={70}
+                  sx={{ bgcolor: "grey.800" }}
+                />
+              )}
               <Image
                 alt={resultFinder}
                 className="rounded-md"
                 src={`/heroes/${resultFinder}`}
-                width={70}
-                height={70}
+                width={imageLoading ? 0 : 70}
+                height={imageLoading ? 0 : 70}
+                onLoad={handleImageLoad}
               />
-            </Tooltip>
-          )
+            </>
+          </Tooltip>
         )}
       </div>
     </>
