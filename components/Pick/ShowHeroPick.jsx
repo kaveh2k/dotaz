@@ -11,7 +11,6 @@ const ShowHeroPick = ({ children, cn }) => {
   const { handleHeroFindFunc, handleFindHeroName } = func.handler;
 
   const [showData, setShowData] = useState(false);
-  // const [searchFinder, setSearchFinder] = useState();
   const [resultFinder, setResultFinder] = useState();
 
   const [loading, setLoading] = useState(true);
@@ -38,10 +37,15 @@ const ShowHeroPick = ({ children, cn }) => {
       ) {
         setResultFinder(String(searchFinder.item.name));
         setShowData(true);
-        setLoading(false);
       }
     }
   }, [data]);
+
+  // ******************************************************
+
+  useEffect(() => {
+    if (showData === true) setLoading(false);
+  }, [showData]);
 
   // ******************************************************
 
