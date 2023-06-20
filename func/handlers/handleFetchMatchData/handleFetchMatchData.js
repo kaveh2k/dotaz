@@ -19,13 +19,11 @@ const handleFetchMatchData = (
       axios
         .post(`${process.env.NEXT_PUBLIC_MATCHES_URL}${perSetMatchId}`)
         .then(async (response) => {
-          console.log(response.data);
           setData(response.data);
         })
         .catch((error) => {
-          console.log("error", error);
-          setShowErrorLocal("please enter your match ID");
-          setShowError("please enter your match ID");
+          setShowErrorLocal("please contact support");
+          setShowError("please contact support");
           setLoading(false);
         });
     } else {
