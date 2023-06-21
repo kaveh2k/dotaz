@@ -51,19 +51,19 @@ const ShowHeroPick = ({ children, cn }) => {
     <>
       <div className={cn}>
         {showData && (
-          <Tooltip
-            title={data.displayName}
-            placement={children[1] === "Radiant" ? "left" : "right"}
-          >
-            <>
-              {imageLoading && (
-                <Skeleton
-                  variant="rectangular"
-                  width={70}
-                  height={70}
-                  sx={{ bgcolor: "grey.800" }}
-                />
-              )}
+          <>
+            {imageLoading && (
+              <Skeleton
+                variant="rectangular"
+                width={70}
+                height={70}
+                sx={{ bgcolor: "grey.800" }}
+              />
+            )}
+            <Tooltip
+              title={data.displayName}
+              placement={children[1] === "Radiant" ? "left" : "right"}
+            >
               <Image
                 alt={resultFinder}
                 className="rounded-md"
@@ -72,8 +72,8 @@ const ShowHeroPick = ({ children, cn }) => {
                 height={imageLoading ? 0 : 70}
                 onLoad={handleImageLoad}
               />
-            </>
-          </Tooltip>
+            </Tooltip>
+          </>
         )}
       </div>
     </>

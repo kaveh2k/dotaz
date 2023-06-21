@@ -49,16 +49,16 @@ const ShowHeroBan = ({ children, cn }) => {
     <>
       <div className={cn}>
         {showData && (
-          <Tooltip title={data.displayName} placement="top-start">
-            <>
-              {imageLoading && (
-                <Skeleton
-                  variant="rectangular"
-                  width={40}
-                  height={40}
-                  sx={{ bgcolor: "grey.800" }}
-                />
-              )}
+          <>
+            {imageLoading && (
+              <Skeleton
+                variant="rectangular"
+                width={40}
+                height={40}
+                sx={{ bgcolor: "grey.800" }}
+              />
+            )}
+            <Tooltip title={data.displayName} placement="top-start">
               <Image
                 alt={resultFinder}
                 className="rounded-md filter grayscale"
@@ -67,8 +67,8 @@ const ShowHeroBan = ({ children, cn }) => {
                 height={imageLoading ? 0 : 40}
                 onLoad={handleImageLoad}
               />
-            </>
-          </Tooltip>
+            </Tooltip>
+          </>
         )}
       </div>
     </>

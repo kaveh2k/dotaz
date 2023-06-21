@@ -41,16 +41,16 @@ const WinLose = forwardRef(function WinLose(props, ref) {
         <div className="flex items-center justify-center space-x-10 p-8">
           <div className="flex flex-col items-center justify-center space-y-4">
             <>
-              <Tooltip title="Radiant" placement="top">
-                <>
-                  {imageLoading && (
-                    <Skeleton
-                      variant="rectangular"
-                      width={120}
-                      height={120}
-                      sx={{ bgcolor: "grey.800" }}
-                    />
-                  )}
+              <>
+                {imageLoading && (
+                  <Skeleton
+                    variant="rectangular"
+                    width={120}
+                    height={120}
+                    sx={{ bgcolor: "grey.800" }}
+                  />
+                )}
+                <Tooltip title="Radiant" placement="top">
                   <Image
                     className={
                       matchData.didRadiantWin
@@ -63,24 +63,24 @@ const WinLose = forwardRef(function WinLose(props, ref) {
                     height={imageLoading ? 0 : 120}
                     onLoad={handleImageLoad}
                   />
-                </>
-              </Tooltip>
+                </Tooltip>
+              </>
               <p>Kills: {radiantScore}</p>
             </>
           </div>
 
           <div className="flex flex-col items-center justify-center space-y-4">
             <>
-              <Tooltip title="Dire" placement="top">
-                <>
-                  {imageLoading && (
-                    <Skeleton
-                      variant="rectangular"
-                      width={120}
-                      height={120}
-                      sx={{ bgcolor: "grey.800" }}
-                    />
-                  )}
+              <>
+                {imageLoading && (
+                  <Skeleton
+                    variant="rectangular"
+                    width={120}
+                    height={120}
+                    sx={{ bgcolor: "grey.800" }}
+                  />
+                )}
+                <Tooltip title="Dire" placement="top">
                   <Image
                     className={
                       matchData.didRadiantWin
@@ -93,8 +93,8 @@ const WinLose = forwardRef(function WinLose(props, ref) {
                     height={imageLoading ? 0 : 120}
                     onLoad={handleImageLoad}
                   />
-                </>
-              </Tooltip>
+                </Tooltip>
+              </>
               <p>Kills: {direScore}</p>
             </>
           </div>
