@@ -1,5 +1,7 @@
 # Dota 2 stats
 
+project website: [dotaz.pro](https://www.dotaz.pro/)
+
 This is a [Next.js](https://nextjs.org/) project with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 You can check any match ID on it
@@ -71,5 +73,5 @@ If you have any questions, feedback, or suggestions, please feel free to contact
     - Add:
         - Add login with Discord, Twitch, and Steam.
         - Add more components to display more detailed information.
-        - Add mongodb database
+        - Add Mongodb database
     - And many more features to come.
