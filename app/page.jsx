@@ -41,7 +41,7 @@ const MatchInfo = () => {
           inputNumRef={inputNumRef}
         >
           <p className="text-rose-700">
-            for example use this match ID 7170144585 or 717014457
+            for example, use this match ID 7855125456 or 7855277763
           </p>
         </Form>
       </div>
