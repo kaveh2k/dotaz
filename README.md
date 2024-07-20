@@ -1,10 +1,10 @@
 # Dota 2 stats
 
-Project website: [dotaz.pro](https://www.dotaz.pro/)
+Project website: [dotaz](https://dotaz.onrender.com/)
 
 This is a [Next.js](https://nextjs.org/) project with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-You can check any match ID on it
+You can check any match ID using this web application.
 More features are planned for the future.
 
 ## Table of Contents
