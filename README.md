@@ -1,6 +1,6 @@
 # Dota 2 stats
 
-Project website: [dotaz](https://dotaz.onrender.com/)
+Project website: [dotaz](https://dotaz.netlify.app/)
 
 This is a [Next.js](https://nextjs.org/) project with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
